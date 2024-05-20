@@ -17,7 +17,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn("bg-white min-h-screen text-slate-900 antialiased", inter.variable, "dark:bg-slate-900 dark:text-slate-50")}>{children}</body>
+      <body
+        className={cn(
+          "bg-background min-h-screen font-sans antialiased",
+          inter.variable,
+          "dark:bg-slate-900 dark:text-slate-50"
+        )}
+      >
+        {children}
+      </body>
     </html>
   );
 }
