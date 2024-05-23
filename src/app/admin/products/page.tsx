@@ -74,7 +74,7 @@ async function ProductsTable() {
       </TableHeader>
       <TableBody>
         {products?.map((product) => (
-          <TableRow key={product.id}>
+          <TableRow key={product.id} >
             <TableCell>
               {product.isAvailableForPurchase ? (
                 <>
