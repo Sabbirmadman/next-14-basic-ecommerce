@@ -1,3 +1,4 @@
+import { getProductsData, getSalesData, getUserData } from "@/app/admin/_actions/adminapislice";
 import {
   Card,
   CardContent,
@@ -6,57 +7,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import db from "@/db/db";
 import { formatCurrency, formatNumber } from "@/lib/formatters";
-import React from "react";
 
-async function getSalesData() {
-  const data = await db.order.aggregate({
-    _sum: {
-      pricePaidInCents: true,
-    },
-    _count: true,
-  });
-
-  return {
-    amount: (data._sum.pricePaidInCents || 0) / 100,
-    numberOfSales: data._count,
-  };
-}
-
-async function getUserData() {
-  const [userCount, orderCount] = await Promise.all([
-    db.user.count(),
-    db.order.aggregate({
-      _sum: {
-        pricePaidInCents: true,
-      },
-    }),
-  ]);
-
-  return {
-    userCount,
-    averageValuePerUser:
-      userCount === 0
-        ? 0
-        : (orderCount._sum.pricePaidInCents || 0) / 100 / userCount / 100,
-  };
-}
-
-async function getProductsData() {
-  const [activeProducts, inactiveProducts] = await Promise.all([
-    db.product.count({ where: { isAvailableForPurchase: true } }),
-    db.product.count({ where: { isAvailableForPurchase : false } }),
-  ]);
-
-  return {
-    activeProducts,
-    inactiveProducts,
-  };
-}
 
 async function AdminDeshboard() {
-  const [salesData, userData , productData] = await Promise.all([
+  const [salesData, userData, productData] = await Promise.all([
     getSalesData(),
     getUserData(),
     getProductsData(),
@@ -82,10 +37,10 @@ async function AdminDeshboard() {
         title="Products"
         subtitle={`Active products : ${formatNumber(
           productData.activeProducts
-          )}`}
+        )}`}
         body={`Inactive products : ${formatNumber(
           productData.inactiveProducts
-          )}`}
+        )}`}
       />
     </div>
   );
