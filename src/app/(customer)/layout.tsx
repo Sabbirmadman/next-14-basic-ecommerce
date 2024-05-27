@@ -2,7 +2,7 @@ import { Nav, NavLink } from "@/components/Nav";
 
 export const dynamic = "force-dynamic";
 
-export default function AdminLayout({
+export default function Layout({
     children,
 }: Readonly<{
     children: React.ReactNode;
@@ -10,10 +10,10 @@ export default function AdminLayout({
     return (
         <>
             <Nav>
-                <NavLink href="/admin">Dashboard</NavLink>
-                <NavLink href="/admin/products">Products</NavLink>
-                <NavLink href="/admin/user">Customers</NavLink>
-                <NavLink href="/admin/orders">Sales</NavLink>
+                <NavLink href="/">Home</NavLink>
+                <NavLink href="/products">Products</NavLink>
+                <NavLink href="/orders">My Orders</NavLink>
+                <NavLink href="/admin">Admin</NavLink>
             </Nav>
             <div className="container my-6">{children}</div>
         </>
