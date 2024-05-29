@@ -7,7 +7,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 
 async function getNewestProducts() {
-    await wait(2000);
+    await wait(1000);
     return db.product.findMany({
         where: {
             isAvailableForPurchase: true,
@@ -19,7 +19,7 @@ async function getNewestProducts() {
 }
 
 async function getPopularProducts() {
-    await wait(2000);
+    await wait(1000);
     return db.product.findMany({
         where: {
             isAvailableForPurchase: true,

@@ -149,8 +149,12 @@ async function deleteProduct(productId: string) {
     return notFound()
   }
 
+try {
   await fs.unlink(product.filePath);
   await fs.unlink(`public${product.imagePath}`);
+} catch (error) {
+  console.log(error);
+}
   
 }
 
